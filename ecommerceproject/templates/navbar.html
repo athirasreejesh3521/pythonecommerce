@@ -1,0 +1,35 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="cointainer-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown {% if 'shop' in request.path %} active {% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          SHOP &emsp;</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'shop:allProdCat' %}">All Products </a><br>
+          {% for cat in links %}
+          <a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}} </a><br>
+          {% endfor %}
+        </div>
+
+      </li>
+      {% if item_count > 0 %}
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'cart:cart_detail' %}"><i class="fa fa-shopping-cart"></i>({{item_count}})</a>
+      </li>
+      {% endif %}
+    </ul>
+
+  <nav class="navbar navbar-light bg-light">
+    <form class="form-inline my-2 my-lg-0" action="{% url 'search_app:SearchResult' %}" method="get">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" style = "position:absolute; left:710px;">
+    <button class="btn btn-outline-success my-2 my-sm-0 " type="submit" style = "position:absolute; left:925px;"><i class="fa fa-search"></i></button>
+    </form>
+  </nav>
+
+  </div>
+  </div>
+</nav>
